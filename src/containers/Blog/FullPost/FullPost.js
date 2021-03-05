@@ -7,14 +7,17 @@ class FullPost extends Component {
   state = {
     loadedId: null,
   };
-  componentDidUpdate() {
-    if (this.props.id) {
+  componentDidMount() {
+    if (this.props.match.params.id) {
       if (
         !this.state.loadedId ||
         (this.state.loadedId && this.state.loadedId.id !== this.props.id)
       ) {
         axios
-          .get("https://jsonplaceholder.typicode.com/posts/" + this.props.id)
+          .get(
+            "https://jsonplaceholder.typicode.com/posts/" +
+              this.props.match.params.id
+          )
           .then(({ data }) => {
             this.setState({ loadedId: data });
           });

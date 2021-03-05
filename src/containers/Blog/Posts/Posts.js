@@ -25,14 +25,14 @@ class Posts extends Component {
       .catch((error) => console.log(error));
   }
   postSelectedHandler = (id) => {
-    this.setState({ selectedId: id });
+    this.props.history.push({ pathname: "/" + id });
   };
   render() {
     const posts = this.state.posts.map((post) => {
       return (
         <Post
-          title={post.title}
           key={post.id}
+          title={post.title}
           auther={post.auther}
           clicked={() => this.postSelectedHandler(post.id)}
         />
