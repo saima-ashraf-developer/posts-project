@@ -3,11 +3,16 @@ import { Route, NavLink, Switch } from "react-router-dom";
 
 import "./Blog.css";
 import Posts from "./Posts/Posts";
-import NewPost from "./NewPost/NewPost";
+import AsycnComponent from "../../hoc/asycnComponent";
+// import NewPost from "./NewPost/NewPost";
+import asychoComponent from "../../hoc/asycnComponent";
 
+let AsycnNewPost = asychoComponent(() => {
+  return import("./NewPost/NewPost");
+});
 class Blog extends Component {
   state = {
-    auth: false,
+    auth: true,
   };
   render() {
     return (
@@ -25,7 +30,7 @@ class Blog extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                  Posts
+                  Posts sdajk
                 </NavLink>
               </li>
               <li>
@@ -45,7 +50,7 @@ class Blog extends Component {
 
         <Switch>
           {this.state.auth ? (
-            <Route path="/new-post" component={NewPost} />
+            <Route path="/new-post" component={AsycnNewPost} />
           ) : null}
           <Route render={() => <h1>Not Found</h1>} />
           {/* <Route path="/posts" component={Posts} /> */}
